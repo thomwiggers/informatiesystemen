@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage[utf8]{inputenc}
+\usepackage{graphicx}
 \usepackage[english,dutch]{babel}
 
 \author{Thom Wiggers\\ s4119444}
@@ -41,22 +42,29 @@ profielen van klanten. Bestellingen kunnen bestaan uit een of meerdere
 paren schoenen, in verschillende maten en aantallen.
 
 \subsubsection{ORM}
-
-\Large{--- Image Here ---}
+\begin{figure}[htp]
+  \centering
+  \includegraphics[keepaspectratio=true, width=345pt]{model1.png}
+  \caption{ORM Model van het voorbeeldsysteem
+    \caption{ORM Model van het voorbeeldsysteem}
+  \label{img:model1}
+\end{figure}
 
 \Large{--- Check syntax --- }
 
 \begin{verbatim}
-Schoen: Schoenmodel (modelnaam) is beschikbaar in 
-          Schoenmaat en is beschikbaar in Kleur.
+Schoen: Schoenmodel (modelnaam) is beschikbaar
+    in Schoenmaat en is beschikbaar in Kleur.
 Bestelitem: Schoen is besteld in aantal.
 Bestelling (ordernummer) heeft Bestelitem.
 Bestelling (ordernummer) is besteld door 
    Klant (klantnummer).
 Bestelling is betaald.
 Bestelling is verzonden.
-Klant (klantnummer) woont aan Straat (straatnaam).
-Klant (klantnummer) woont op Huisnummer (nr).
+Klant (klantnummer) woont aan 
+   Straat (straatnaam).
+Klant (klantnummer) woont op 
+   Huisnummer (nr).
 Klant (klantnummer) woont in Stad (naam).
 \end{verbatim}
 
