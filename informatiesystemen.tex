@@ -1,5 +1,6 @@
 \documentclass{article}
 
+\usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage[english,dutch]{babel}
@@ -13,7 +14,7 @@
 \section{Huishoudelijke mededelingen}
 Dit project maak ik individueel. 
 
-\section{Taak 1 - ORC}
+\section{Taak 1 - ORC vs. SQL}
 \subsection{Inleiding}
 \label{sub:1-orm-inleiding}
 ORM is een methode om door middel van modellen systemen te ontwikkelen waarbij
@@ -45,12 +46,12 @@ paren schoenen, in verschillende maten en aantallen.
 \begin{figure}[htp]
   \centering
   \includegraphics[keepaspectratio=true, width=345pt]{model1.png}
-  \caption{ORM Model van het voorbeeldsysteem
-    \caption{ORM Model van het voorbeeldsysteem}
+  \caption{ORM Model van het voorbeeldsysteem}
   \label{img:model1}
 \end{figure}
 
 \Large{--- Check syntax --- }
+\Large{Todo: Fix diagram: Naam, constraint Schoen}
 
 \begin{verbatim}
 Schoen: Schoenmodel (modelnaam) is beschikbaar
@@ -66,9 +67,83 @@ Klant (klantnummer) woont aan
 Klant (klantnummer) woont op 
    Huisnummer (nr).
 Klant (klantnummer) woont in Stad (naam).
+Klant (klantnummer) heet Naam.
 \end{verbatim}
 
-\subsubsection{SQL Tables}
+\subsubsection{SQL Tabellen}
 
+Het transformeren van het ORM model naar SQL tabellen is redelijk 
+eenvoudig, maar om dubbel voorkomende gegevens te voorkomen heb ik
+op verschillende plaatsen een identificatienummer aan tabellen 
+toegevoegd als vervangende primary key.
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{l|l|l|l}
+    \textbf{id} & \textbf{Schoenmodel} & \textbf{Kleur} & \textbf{Schoenmaat} \\
+    \hline
+    1 & Model a              & Zwart          & 43 \\
+    2 & Model a              & Zwart          & 42 \\
+    3 & Model a              & Wit            & 43 \\
+    \ldots & \ldots          & \ldots         & \ldots \\
+  \end{tabular}
+  \caption{Schoen tabel}
+  \label{tab:schoen}
+\end{table}
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{l|l|l|l}
+    \textbf{id} & \textbf{schoenid} & \textbf{Aantal} \\
+    1           & 2                 & 1               \\
+    2           & 2                 & 2               \\
+    3           & 3                 & 1               \\
+    \ldots      & \ldots            & \ldots          \\
+  \end{tabular}
+  \caption{Bestelitem Tabel}
+  \label{tab:bestelitem}
+\end{table}
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{l|l|l|l}
+    \textbf{Bestelnummer} & \textbf{Bestelddoor} & \textbf{Verzonden} 
+    & \textbf{Betaald} \\
+    \hline
+    1 & 1                &  Y & Y \\
+    2 & 1                &  N & Y \\
+    3 & 2                & Y  & N \\
+    \ldots & \ldots & \ldots & \ldots \\
+  \end{tabular}
+  \caption{Bestellingen}
+  \label{tab:bestellingen}
+\end{table}
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{l|l}
+    \textbf{Bestelitem} & \textbf{Bestelling}\\ 
+    \hline
+    1      & 1      \\
+    2      & 1      \\
+    3      & 2      \\
+    \ldots & \ldots \\
+  \end{tabular}
+  \caption{BestelitemBestelling: Bestelde items horende bij bestellingen}
+  \label{tab:bestelitembestelling}
+\end{table}
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{l|l|l|l|l}
+    \textbf{Klantnummer} & \textbf{Naam} & \textbf{Straat} & \textbf{Huisnummer} & \textbf{Stad} \\
+    \hline
+    1 & John Doe & Heyendaalseweg & 91 & Nijmegen \\
+    2 & Steve Foo & Asselsestraat & 34 & Apeldoorn \\
+    3 & Jane Bar  & Kanaalstraat  & 33 & Amsterdam \\
+  \end{tabular}
+  \caption{Klant tabel}
+  \label{tab:klant}
+\end{table}
 
 \end{document}
