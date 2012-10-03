@@ -77,6 +77,9 @@ eenvoudig, maar om dubbel voorkomende gegevens te voorkomen heb ik
 op verschillende plaatsen een identificatienummer aan tabellen 
 toegevoegd als vervangende primary key.
 
+Hier wordt al een duidelijk nadeel van SQL-gebaseerde databases
+zichtbaar: het is niet mogelijk om gegevens te objectiviseren.
+
 \begin{table}[htb]
   \centering
   \begin{tabular}{l|l|l|l}
@@ -145,5 +148,55 @@ toegevoegd als vervangende primary key.
   \caption{Klant tabel}
   \label{tab:klant}
 \end{table}
+
+\subsection{Eenvoudige gegevens uit het systeem halen}
+
+\subsubsection{SQL}
+
+Eenvoudige gegevens uit het informatiesysteem halen is eenvoudig in SQL. Een
+\verb+SELECT+ statement is erg eenvoudig voor elkaar te krijgen. Bijvoorbeeld
+het selecteren van alle verschillende schoenen die in de winkel te koop worden
+aangeboden:
+
+\begin{verbatim}
+SELECT Schoenmodel, Kleur, Schoenmaat FROM Schoen;
+\end{verbatim}
+
+\subsubsection{ORC}
+
+In ORC is het ook eenvoudig om dezelfde gegevens op te halen:
+
+\begin{verbatim}
+Schoenmodel, Kleur, Schoenmaat FROM Schoen
+\end{verbatim}
+
+Het verschil tussen ORC en SQL is hier niet zo groot. SQL heeft \verb+SELECT+,
+ORC heeft \verb+List+, maar verder zou men bijna copy/paste kunnen doen.
+
+\subsection{Conditioneel gegevens uit het systeem halen}
+
+Men wil niet altijd alle gegevens uit een informatiesysteem hebben. Daarom is
+het in SQL en in ORC mogelijk om condities op te geven waaraan de op te vragen
+informatie moet voldoen.
+
+\subsubsection{SQL}
+
+Stel, ik wil alle verschillende modellen van zwarte schoenen hebben in maat 43.
+
+\begin{verbatim}
+SELECT Schoenmodel 
+FROM Schoen 
+WHERE Schoenmaat = '43' 
+  AND Kleur='Zwart';
+\end{verbatim}
+
+\subsubsection{ORC}
+
+In ORC gaat het zo: 
+
+\begin{verbatim}
+Schoenmodel FROM Schoen in Kleur 'Zwart' 
+  AND in Schoenmaat '43'
+\end{verbatim}
 
 \end{document}
