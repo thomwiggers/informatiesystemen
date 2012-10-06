@@ -159,7 +159,8 @@ het selecteren van alle verschillende schoenen die in de winkel te koop worden
 aangeboden:
 
 \begin{verbatim}
-SELECT Schoenmodel, Kleur, Schoenmaat FROM Schoen;
+SELECT Schoenmodel, Kleur, Schoenmaat 
+FROM Schoen;
 \end{verbatim}
 
 \subsubsection{ORC}
@@ -171,7 +172,7 @@ Schoenmodel, Kleur, Schoenmaat FROM Schoen
 \end{verbatim}
 
 Het verschil tussen ORC en SQL is hier niet zo groot. SQL heeft \verb+SELECT+,
-ORC heeft \verb+List+, maar verder zou men bijna copy/paste kunnen doen.
+maar verder zou men bijna copy/paste kunnen doen.
 
 \subsection{Conditioneel gegevens uit het systeem halen}
 
@@ -198,5 +199,19 @@ In ORC gaat het zo:
 Schoenmodel FROM Schoen in Kleur 'Zwart' 
   AND in Schoenmaat '43'
 \end{verbatim}
+
+Ook hier is er een grote overeenkomst tussen SQL en ORC. SQL heeft hier het 
+\verb+WHERE+ keyword om onderscheid te maken tussen de condities en de 
+tabel, maar verder is het grotendeels hetzelfde. 
+
+\subsection{Complexe informatie uit het systeem halen}
+
+Stel, ik wil weten uit welke steden de mensen komen die zwarte schoenen 
+besteld hebben.
+
+\subsubsection{SQL}
+
+
+\subsubsection{ORC}
 
 \end{document}
