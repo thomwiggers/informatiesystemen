@@ -80,7 +80,10 @@ toegevoegd als vervangende primary key.
 Hier wordt al een duidelijk nadeel van SQL-gebaseerde databases
 zichtbaar: het is niet mogelijk om gegevens te objectiviseren.
 
-\begin{table}[htb]
+Zie hiervoor de tabellen \ref{tab:schoen}, \ref{tab:bestelitem},
+\ref{tab:bestellingen}, \ref{tab:bestelitembestelling} en \ref{tab:klant}.
+
+\begin{table}[hp]
   \centering
   \begin{tabular}{l|l|l|l}
     \textbf{id} & \textbf{Schoenmodel} & \textbf{Kleur} & \textbf{Schoenmaat} \\
@@ -94,7 +97,7 @@ zichtbaar: het is niet mogelijk om gegevens te objectiviseren.
   \label{tab:schoen}
 \end{table}
 
-\begin{table}[htb]
+\begin{table}[hp]
   \centering
   \begin{tabular}{l|l|l|l}
     \textbf{id} & \textbf{schoenid} & \textbf{Aantal} \\
@@ -107,7 +110,7 @@ zichtbaar: het is niet mogelijk om gegevens te objectiviseren.
   \label{tab:bestelitem}
 \end{table}
 
-\begin{table}[htb]
+\begin{table}[hp]
   \centering
   \begin{tabular}{l|l|l|l}
     \textbf{Bestelnummer} & \textbf{Bestelddoor} & \textbf{Verzonden} 
@@ -122,7 +125,7 @@ zichtbaar: het is niet mogelijk om gegevens te objectiviseren.
   \label{tab:bestellingen}
 \end{table}
 
-\begin{table}[htb]
+\begin{table}[hp]
   \centering
   \begin{tabular}{l|l}
     \textbf{Bestelitem} & \textbf{Bestelling}\\ 
@@ -136,7 +139,7 @@ zichtbaar: het is niet mogelijk om gegevens te objectiviseren.
   \label{tab:bestelitembestelling}
 \end{table}
 
-\begin{table}[htb]
+\begin{table}[hp]
   \centering
   \begin{tabular}{l|l|l|l|l}
     \textbf{Klantnummer} & \textbf{Naam} & \textbf{Straat} & \textbf{Huisnummer} & \textbf{Stad} \\
@@ -211,7 +214,48 @@ besteld hebben.
 
 \subsubsection{SQL}
 
+\begin{verbatim}
+SELECT stad
+FROM Klant
+WHERE Klant.Klantnummer IN 
+  (SELECT Bestelddoor
+   FROM   Bestellingen 
+   JOIN   BestelitemBestelling
+   ON   Bestelling = Bestelnummer
+   WHERE  Bestelitem IN 
+     (SELECT id 
+      FROM Bestelitem
+      WHERE Schoenid IN
+        (SELECT id
+         FROM Schoen
+         WHERE Kleur = 'Zwart')
+     )
+  )   
+\end{verbatim}
+
+Dit is duidelijk een erg complexe query, omdat men vele tabellen door moet
+omdat de koppeling tussen de informatie vrij zwak is in Relationele Databases.
 
 \subsubsection{ORC}
+
+\begin{verbatim}
+Stad woonplaats van Klant 
+  die besteld heeft Bestelling
+    die Bestelitem heeft 
+    met Schoen in kleur Zwart
+\end{verbatim}
+
+De ORC query is hier duidelijk een stuk eenvoudiger. Dit komt doordat in een
+ORM-schema de relaties tussen verschillende gegevens een stuk duidelijker is
+edefineerd. Waar SQL steeds in verschillende lijsten moet zoeken die allemaal
+apart gemaakt dienen te worden, is het hier iets wat impliciet gebeurt.
+
+\subsection{Conclusie} 
+
+Waar ORC en SQL vaak erg op elkaar lijken, is ORC soms in staat om veel
+duidelijker queries op te stellen, vooral wanneer het om complexe informatie
+gaat. Relationele Databases zijn minder sterk in het weergeven van de verbanden
+tussen informatie, en er moeten vaak extra gegevenstypen geintroduceerd worden
+(identificatienummers bijvoorbeeld) om dataduplicatie te voorkomen.
 
 \end{document}
