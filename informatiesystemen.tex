@@ -16,7 +16,6 @@ Dit project maak ik individueel.
 
 \section{Taak 1 - ORC vs. SQL}
 \subsection{Inleiding}
-\label{sub:1-orm-inleiding}
 ORM is een methode om door middel van modellen systemen te ontwikkelen waarbij
 gepoogd wordt zo min mogelijk fouten toe te laten en zo veel mogelijk
 redundantie in de opgeslagen gegevens te voorkomen. 
@@ -257,5 +256,47 @@ duidelijker queries op te stellen, vooral wanneer het om complexe informatie
 gaat. Relationele Databases zijn minder sterk in het weergeven van de verbanden
 tussen informatie, en er moeten vaak extra gegevenstypen geintroduceerd worden
 (identificatienummers bijvoorbeeld) om dataduplicatie te voorkomen.
+
+\section{Taak 2 - Typegerelateerdheid}
+
+\subsection{Inleiding}
+Omdat ik denk dat dit een belangrijk onderdeel is van de stof, en veel van de
+problemen behandeld in het college een oplossing hebben die steeds subtiel is 
+en niet per se direct voor de hand ligt, ga ik hier proberen een paar extra
+voorbeelden te maken en uit te werken, om zo mijn begrip van 
+typegerelateerdheid wat scherper te krijgen.
+
+Ik ga proberen om de afleidingsregels zoals vermeld in het dictaat 
+\cite[p.~41]{dictaat} opnieuw af te leiden.
+
+\subsection{Regels}
+\subsubsection{T1}
+
+\[ 
+  \vdash x \sim x
+\]
+
+Type $x$ is vanzelfsprekend typegerelateerd met zichzelf. De typegerelateerdheidsrelatie
+is \emph{reflexief}.
+
+\subsubsection{T2}
+\[ 
+  x \sim y \vdash y \sim x
+\]
+
+Typegerelateerdheid is ook een \emph{symmetrische} relatie.
+
+\subsubsection{T3}
+\[
+  \sqcap (x) = \sqcap (y) \wedge y \sim z \vdash x \sim z
+\]
+
+\begin{thebibliography}{9}
+  \bibitem{dictaat}
+    Advanced Information Models, 
+    Arthur ten Hofstede en Patrick van Bommel,
+    Radboud Universiteit Nijmegen,
+    September 2011,
+\end{thebibliography}
 
 \end{document}
