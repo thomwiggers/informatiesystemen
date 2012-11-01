@@ -1,9 +1,16 @@
 \documentclass{article}
 
+\usepackage[pdftex]{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{hyperref}
+\usepackage{tkz-orm}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage[english,dutch]{babel}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[section]{placeins}
 
 \author{Thom Wiggers\\ s4119444}
 \title{Informatiesystemen 1}
@@ -151,6 +158,7 @@ Zie hiervoor de tabellen \ref{tab:schoen}, \ref{tab:bestelitem},
   \label{tab:klant}
 \end{table}
 
+\FloatBarrier
 \subsection{Eenvoudige gegevens uit het systeem halen}
 
 \subsubsection{SQL}
@@ -274,7 +282,7 @@ Ik ga proberen om de afleidingsregels zoals vermeld in het dictaat
 
 \[ 
   \vdash x \sim x
-\]
+\] waar $\sim$ typegerelateerd betekent.
 
 Type $x$ is vanzelfsprekend typegerelateerd met zichzelf. De typegerelateerdheidsrelatie
 is \emph{reflexief}.
@@ -287,10 +295,55 @@ is \emph{reflexief}.
 Typegerelateerdheid is ook een \emph{symmetrische} relatie.
 
 \subsubsection{T3}
+\label{s2e:t3}
 \[
   \sqcap (x) = \sqcap (y) \wedge y \sim z \vdash x \sim z
-\]
+\] waar $\sqcap (x)$ de \emph{Pater familias} van $x$ is.
 
+Dit betekent dat als $x$ en $y$ specialisaties of generalisaties van hetzelfde
+objecttype zijn, en $y$ is typegerelateerd aan $z$, $x$ ook typegerelateerd is
+aan $z$. Zie hiervoor ook figuur \ref{fig:specialisatie}. Elementen in
+``Parent'' ($\sqcap(x)$ en $\sqcap(y)$) komen ook voor in $x$ en in $y$, daar
+zij specialisaties van ``Parent'' zijn, ze hebben grotendeels dezelfde
+eigenschappen, alleen een paar meer. Elementen die typegerelateerd zijn aan
+``Parent'' en aan \'e\'en van de subtypes van ``Parent'' zijn dus ook
+typegerelateerd aan de andere subtypes.
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}[every object type/.style={shape=circle},
+    edge from parent/.style=subtype]
+    \entity {Parent} 
+    child {node[entity] {x}}
+    child {node[entity] {y}};
+  \end{tikzpicture}
+  \caption{Specialisatie}
+  \label{fig:specialisatie}
+\end{figure}
+
+
+\subsubsection{T4}
+\[
+  x \operatorname{Gen} y \wedge y \sim z \vdash x \sim z
+\] waar $x \operatorname{Gen} y$ betekent ``$x$ is een generalisatie van $y$''.
+
+Op dezelfde manier als bij T3 (\ref{s2e:t3}), komen elementen van
+generalisaties voor in het gegeneraliseerde type. Typen die gerelateerd zijn aan 
+een bepaald type, zijn dus ook gerelateerd aan de generalisaties
+van dat type.
+
+
+
+\begin{figure}[b]
+  \centering
+  \begin{tikzpicture}[every object type/.style={shape=circle},
+    edge from parent/.style={subtype,dotted}]
+    \entity {y} 
+      child {node[entity] {x}};
+  \end{tikzpicture}
+  \caption{Generalisatie}
+  \label{fig:generalisatie}
+\end{figure}
 \begin{thebibliography}{9}
   \bibitem{dictaat}
     Advanced Information Models, 
