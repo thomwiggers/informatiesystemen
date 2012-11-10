@@ -301,7 +301,7 @@ Typegerelateerdheid is ook een \emph{symmetrische} relatie.
 \] waar $\sqcap (x)$ de \emph{Pater familias} van $x$ is.
 
 Dit betekent dat als $x$ en $y$ specialisaties of generalisaties van hetzelfde
-objecttype zijn, en $y$ is typegerelateerd aan $z$, $x$ ook typegerelateerd is
+type zijn, en $y$ is typegerelateerd aan $z$, $x$ ook typegerelateerd is
 aan $z$. Zie hiervoor ook figuur \ref{fig:specialisatie}. Elementen in
 ``Parent'' ($\sqcap(x)$ en $\sqcap(y)$) komen ook voor in $x$ en in $y$, daar
 zij specialisaties van ``Parent'' zijn, ze hebben grotendeels dezelfde
@@ -333,7 +333,6 @@ een bepaald type, zijn dus ook gerelateerd aan de generalisaties
 van dat type.
 
 
-
 \begin{figure}[b]
   \centering
   \begin{tikzpicture}[every object type/.style={shape=circle},
@@ -344,6 +343,34 @@ van dat type.
   \caption{Generalisatie}
   \label{fig:generalisatie}
 \end{figure}
+
+\subsubsection{T5}
+\label{T5}
+\[
+  x,y \in \mathcal{G} \wedge \operatorname{Elt}(x) \sim 
+  \operatorname{Elt}(y) \vdash x \sim y
+\]
+
+Als $x$ en $y$ powertypen zijn, en hun elementen typegerelateerd, 
+dan zijn deze powertypen natuurlijk ook gerelateerd.
+
+\subsubsection{T6}
+\[
+  x,y \in \mathcal{S} \wedge \operatorname{Elt}(x) \sim 
+  \operatorname{Elt}(y) \vdash x \sim y
+\]
+
+Zoals bij T5 (\ref{T5}), zijn als de elementen van sequentietypen 
+typegerelateerd zijn, de sequentietypen zelf ook typegerelateerd.
+
+\subsubsection{T7}
+\[
+  \mathcal{O}_x = \mathcal{O}_y \vdash x \sim y
+\]
+
+Als het objecttype van $x$ en die van $y$ dezelfde zijn, zijn $x$ en $y$ 
+typegerelateerd.
+
 \begin{thebibliography}{9}
   \bibitem{dictaat}
     Advanced Information Models, 
