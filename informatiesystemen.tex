@@ -352,7 +352,8 @@ van dat type.
 \]
 
 Als $x$ en $y$ powertypen zijn, en hun elementen typegerelateerd, 
-dan zijn deze powertypen natuurlijk ook gerelateerd.
+dan zijn deze powertypen, verzamelingen van hun elementtypen,
+natuurlijk ook gerelateerd.
 
 \subsubsection{T6}
 \[
@@ -370,6 +371,21 @@ typegerelateerd zijn, de sequentietypen zelf ook typegerelateerd.
 
 Als het objecttype van $x$ en die van $y$ dezelfde zijn, zijn $x$ en $y$ 
 typegerelateerd.
+
+\subsection{Voorbeeld}
+
+Ik gebruik hier \cite[figuur 2.26]{dictaat} uit het dictaat. Ik ga de bewering 
+dat alle typen behalve $C$ en $B$, $C$ en $E$, en $C$ en $F$, typegerelateerd
+zijn toetsen.
+
+\begin{align}
+  A \operatorname{Gen} B               & \vdash A \sim B \\
+  A \operatorname{Gen} C                & \vdash A \sim C \\
+  \sqcap(D) = \sqcap(A) \wedge A \sim C & \vdash D \sim C \\
+  \sqcap(D) = \sqcap(A) \wedge A \sim B & \vdash D \sim B \\
+  B, E \in \mathcal{G} \wedge A \sim D  & \vdash B \sim E 
+\end{align}
+
 
 \begin{thebibliography}{9}
   \bibitem{dictaat}
