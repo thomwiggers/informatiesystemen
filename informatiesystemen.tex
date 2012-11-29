@@ -15,6 +15,11 @@
 \author{Thom Wiggers\\ s4119444}
 \title{Informatiesystemen 1}
 
+\newcommand{\Spec}{\ensuremath{\operatorname{Spec}}}
+\newcommand{\Gen}{\ensuremath{\operatorname{Gen}}}
+\newcommand{\Base}{\ensuremath{\operatorname{Base}}}
+\newcommand{\total}{\ensuremath{\operatorname{total}}}
+
 \begin{document}
 \maketitle
 \tableofcontents
@@ -420,7 +425,24 @@ mijn notities, omdat het bedenken van een kloppend schema door willkeurig
 opschrijven van symbolen niet echt doenbaar is.}. Ik ga ook proberen
 verschillende constraints in een model te gebruiken.
 
-\subsection{}
+\subsection{Systeem 1}
+\begin{align*}
+  \mathcal{P}    & = \{p1,p2,p3,p4\}\\
+  \mathcal{E} & = \{A,B,C\} \\
+  \mathcal{F} & = \{f,g\}   \\
+  \mathcal{G} & = \emptyset        \\  
+  \mathcal{S} & = \emptyset        \\
+  \Spec       &\Rightarrow B \Spec A       \\
+  f           & = \{p1,p2\} \\   
+  g           & = \{p3,p4\} \\
+  \Base (p1)   & = A         \\
+  \Base (p2)   & = B         \\
+  \Base (p3)   & = A         \\
+  \Base (p4)   & = C        \\ 
+  \total (\tau) &\text{ where } \tau = \{p1\} \\
+  \total (\tau) &\text{ where } \tau = \{p2\} \\
+\end{align*}
+
 
 \begin{thebibliography}{9}
   \bibitem{dictaat}
