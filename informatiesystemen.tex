@@ -19,6 +19,8 @@
 \newcommand{\Gen}{\ensuremath{\operatorname{Gen}}}
 \newcommand{\Base}{\ensuremath{\operatorname{Base}}}
 \newcommand{\total}{\ensuremath{\operatorname{total}}}
+\newcommand{\unique}{\ensuremath{\operatorname{unique}}}
+\newcommand{\Pop}{\ensuremath{\operatorname{Pop}}}
 
 \begin{document}
 \maketitle
@@ -413,7 +415,7 @@ maar ook een aantal harde regels kent. Veel van die regels zijn makkelijk
 beredeneerbaar, zoals bijvoorbeeld typegerelateerdheid van powertypen, en 
 sommige anderen zijn iets moeilijker om te onderbouwen.
 
-\section{Taak 3 - Constraints}
+\section{Taak 3 - Constraints en populeerbaarheid}
 
 \subsection{Inleiding}
 
@@ -443,13 +445,57 @@ verschillende constraints in een model te gebruiken.
   \total (\tau) &\text{ where } \tau = \{p2\} \\
 \end{align*}
 
+Instanties van $A$ moeten in $f$ een rol spelen ($\total (p1)$) en ook alle elementen in
+$B$ moeten dat ($\total (p2)$). $B$ is daarnaast een specialisatie van $A$, met als gevolg
+dat instanties van $B$ ook in $A$ voorkomen. Dit betekent echter niet dat de populaties van
+$A$ en $B$ gelijk moeten zijn: $B$ kan een subset zijn van de instanties van $A$. Een voorbeeld
+zou zijn dat $A$ studenten betekent, en $B$ studentmentoren.
+
+Dit systeem is Globaal Objectpopuleerbaar: want er is een voorbeeld populatie:
+\begin{align*}
+  \Pop (A) & = \{a1,a2\}                 \\
+  \Pop (B) & = \{a2\}                    \\
+  \Pop (C) & = \{c\}                     \\
+  \Pop (f) & = \{ \{a1,a2\}, \{a2,a2\}\} \\
+  \Pop (g) & = \{ \{a1,c \} \}           \\
+\end{align*}
+
+Stel we zouden de constraint $\operatorname{unique}(\{p1\}) \wedge \operatorname{unique}(\{p2\})$
+toevoegen. Dan zou er een 1-op-1 mapping van $A$ op $B$ ontstaan, waaraan door de totale rol 
+constraints alle elementen van $A$ en $B$ mee moeten doen. Dan creëert men dus een situatie
+waarin $\operatorname{Pop}(A)=\operatorname{Pop}(B)$.
+
+Als men in dit systeem $\total (p1)$ zou weglaten, en $\operatorname{unique} (\{p2,p4\})$ 
+toevoegt, dan ontstaat een leuk nieuw systeem, waarin men $\xi (\{f,g\})$ kan doen. 
+
+\[
+  \xi (\tau) = \sigma_{p1=p3} (f \bowtie g)
+\]
+
+Hierdoor krijgt men het volgende systeem:
+
+\begin{align*}
+  \mathcal{P} & = \{p1,p2,p4\}    \\
+  \mathcal{E} & = \{A,B,C\}       \\
+  \mathcal{F} & =  \{f\bowtie g\} \\
+  \Spec &\Rightarrow B \Spec A    \\
+  f \bowtie g & = \{p1,p2,p4\}    \\
+  \Base (p1)  & = A               \\
+  \Base (p2)  & = B               \\
+  \Base (p3)  & = C               \\
+  \unique (\tau) &\text{ where } \tau = \{p2,p4\} \\
+\end{align*}
+
+
+
+
 
 \begin{thebibliography}{9}
   \bibitem{dictaat}
     Advanced Information Models, 
     Arthur ten Hofstede en Patrick van Bommel,
     Radboud Universiteit Nijmegen,
-    September 2011,
+    September 2011.
 \end{thebibliography}
 
 \end{document}
