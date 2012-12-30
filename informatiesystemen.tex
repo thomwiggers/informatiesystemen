@@ -112,8 +112,8 @@ Zie hiervoor de tabellen \ref{tab:schoen}, \ref{tab:bestelitem},
 
 \begin{table}[hp]
   \centering
-  \begin{tabular}{l|l|l|l}
-    \textbf{id} & \textbf{schoenid} & \textbf{Aantal} \\
+  \begin{tabular}{l|l|l}
+    \textbf{id} & \textbf{schoenid} & \textbf{Aantal} \\\hline
     1           & 2                 & 1               \\
     2           & 2                 & 2               \\
     3           & 3                 & 1               \\
@@ -160,6 +160,7 @@ Zie hiervoor de tabellen \ref{tab:schoen}, \ref{tab:bestelitem},
     1 & John Doe & Heyendaalseweg & 91 & Nijmegen \\
     2 & Steve Foo & Asselsestraat & 34 & Apeldoorn \\
     3 & Jane Bar  & Kanaalstraat  & 33 & Amsterdam \\
+    \dots & \dots & \dots& \dots& \dots \\
   \end{tabular}
   \caption{Klant tabel}
   \label{tab:klant}
@@ -425,7 +426,8 @@ werken. In het bijzonder ga ik het deze keer proberen op te schrijven zonder
 gebruik te maken van afbeeldingen\footnote{Ik maak wel gebruik van schema's in
 mijn notities, omdat het bedenken van een kloppend schema door willkeurig
 opschrijven van symbolen niet echt doenbaar is.}. Ik ga ook proberen
-verschillende constraints in een model te gebruiken.
+verschillende constraints in een model te gebruiken en kijk naar de
+populeerbaarheid.
 
 \subsection{Systeem 1}
 \begin{align*}
@@ -445,13 +447,15 @@ verschillende constraints in een model te gebruiken.
   \total (\tau) &\text{ where } \tau = \{p2\} \\
 \end{align*}
 
-Instanties van $A$ moeten in $f$ een rol spelen ($\total (p1)$) en ook alle elementen in
-$B$ moeten dat ($\total (p2)$). $B$ is daarnaast een specialisatie van $A$, met als gevolg
-dat instanties van $B$ ook in $A$ voorkomen. Dit betekent echter niet dat de populaties van
-$A$ en $B$ gelijk moeten zijn: $B$ kan een subset zijn van de instanties van $A$. Een voorbeeld
-zou zijn dat $A$ studenten betekent, en $B$ studentmentoren.
+Instanties van $A$ moeten in $f$ een rol spelen ($\total (p1)$) en ook alle
+elementen in $B$ moeten dat ($\total (p2)$). $B$ is daarnaast een specialisatie
+van $A$, met als gevolg dat instanties van $B$ ook in $A$ voorkomen. Dit
+betekent echter niet dat de populaties van $A$ en $B$ gelijk moeten zijn: $B$
+kan een subset zijn van de instanties van $A$. Een voorbeeld zou zijn dat $A$
+studenten betekent, en $B$ studentmentoren.
 
 Dit systeem is Globaal Objectpopuleerbaar: want er is een voorbeeld populatie:
+
 \begin{align*}
   \Pop (A) & = \{a1,a2\}                 \\
   \Pop (B) & = \{a2\}                    \\
@@ -460,13 +464,21 @@ Dit systeem is Globaal Objectpopuleerbaar: want er is een voorbeeld populatie:
   \Pop (g) & = \{ \{a1,c \} \}           \\
 \end{align*}
 
-Stel we zouden de constraint $\operatorname{unique}(\{p1\}) \wedge \operatorname{unique}(\{p2\})$
-toevoegen. Dan zou er een 1-op-1 mapping van $A$ op $B$ ontstaan, waaraan door de totale rol 
-constraints alle elementen van $A$ en $B$ mee moeten doen. Dan creëert men dus een situatie
-waarin $\operatorname{Pop}(A)=\operatorname{Pop}(B)$.
+Doordat dit model Globaal Objectpopuleerbaar is, is het direct ook Globaal
+Atomair populeerbaar, Lokaal Atomair populeerbaar, en Lokaal
+Objectpopuleerbaar. Voor populaties in de bovenstaande klassen kan men
+hetzelfde voorbeeld gebruiken.\\
 
-Als men in dit systeem $\total (p1)$ zou weglaten, en $\operatorname{unique} (\{p2,p4\})$ 
-toevoegt, dan ontstaat een leuk nieuw systeem, waarin men $\xi (\{f,g\})$ kan doen. 
+
+Stel we zouden de constraint $\operatorname{unique}(\{p1\}) \wedge
+\operatorname{unique}(\{p2\})$ toevoegen. Dan zou er een 1-op-1 mapping van $A$
+op $B$ ontstaan, waaraan door de totale rol constraints alle elementen van $A$
+en $B$ mee moeten doen. Dan creëert men dus een situatie waarin
+$\operatorname{Pop}(A)=\operatorname{Pop}(B)$.
+
+Als men in dit systeem $\total (p1)$ zou weglaten, en $\operatorname{unique}
+(\{p2,p4\})$ toevoegt, dan ontstaat een leuk nieuw systeem, waarin men $\xi
+(\{f,g\})$ kan doen. 
 
 \[
   \xi (\tau) = \sigma_{p1=p3} (f \bowtie g)
@@ -486,7 +498,24 @@ Hierdoor krijgt men het volgende systeem:
   \unique (\tau) &\text{ where } \tau = \{p2,p4\} \\
 \end{align*}
 
+Uiteraard is dit systeem Globaal Objectpopuleerbaar: 
+\[ \Pop (A) = \{a\},\  \Pop (B) = \{b\},\  \Pop (C)= \{c\} \]
 
+\subsection{Systeem 2}
+
+In dit onderdeel gebruik ik het volgende systeem: 
+
+\begin{align*}
+  \mathcal{P}   & = \emptyset                               \\
+  \mathcal{E}   & = \{A, B, C\}                             \\
+  \mathcal{F}   & = \emptyset                               \\
+  \mathcal{G}   & = \{A, C\}                                \\
+  \mathcal{S}   & = \emptyset                               \\
+  \Spec         & \Rightarrow \mathcal{G} (A) \Spec C       \\
+                & \Rightarrow B \Spec A                     \\
+  \Gen          & \Rightarrow C \Gen B                      \\
+  \total (\tau) & \text{ where } \tau = \{\mathcal{G} (C)\} \\
+\end{align*}
 
 
 
