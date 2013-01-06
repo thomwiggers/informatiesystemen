@@ -286,6 +286,7 @@ Ik ga proberen om de afleidingsregels zoals vermeld in het dictaat
 \cite[p.~41]{dictaat} opnieuw af te leiden.
 
 \subsection{Regels}
+\label{sse:regels}
 \subsubsection{T1}
 
 \[ 
@@ -308,7 +309,7 @@ Typegerelateerdheid is ook een \emph{symmetrische} relatie.
   \sqcap (x) = \sqcap (y) \wedge y \sim z \vdash x \sim z
 \] waar $\sqcap (x)$ de \emph{Pater familias} van $x$ is.
 
-Dit betekent dat als $x$ en $y$ specialisaties of generalisaties van hetzelfde
+Dit betekent dat als $x$ en $y$ specialisaties van hetzelfde
 type zijn, en $y$ is typegerelateerd aan $z$, $x$ ook typegerelateerd is
 aan $z$. Zie hiervoor ook figuur \ref{fig:specialisatie}. Elementen in
 ``Parent'' ($\sqcap(x)$ en $\sqcap(y)$) komen ook voor in $x$ en in $y$, daar
@@ -316,6 +317,9 @@ zij specialisaties van ``Parent'' zijn, ze hebben grotendeels dezelfde
 eigenschappen, alleen een paar meer. Elementen die typegerelateerd zijn aan
 ``Parent'' en aan \'e\'en van de subtypes van ``Parent'' zijn dus ook
 typegerelateerd aan de andere subtypes.
+
+Er is ook het bijzondere geval waarbij $y=z$, waarmee bewezen kan worden
+dat $x \sim y$.
 
 \begin{figure}
   \centering
@@ -339,6 +343,8 @@ Op dezelfde manier als bij T3 (\ref{s2e:t3}), komen elementen van
 generalisaties voor in het gegeneraliseerde type. Typen die gerelateerd zijn aan 
 een bepaald type, zijn dus ook gerelateerd aan de generalisaties
 van dat type.
+
+Een variant van deze waarbij $y=z$ bewijst dat $x \Gen y \vdash x \sim y$.
 
 
 \begin{figure}[b]
@@ -380,41 +386,38 @@ typegerelateerd zijn, de sequentietypen zelf ook typegerelateerd.
 Als het objecttype van $x$ en die van $y$ dezelfde zijn, zijn $x$ en $y$ 
 typegerelateerd.
 
+\clearpage
+
 \subsection{Voorbeeld}
 
 Ik gebruik hier \cite[figuur 2.26]{dictaat} uit het dictaat. Ik ga de bewering 
 dat alle typen behalve $C$ en $B$, $C$ en $E$, en $C$ en $F$, typegerelateerd
 zijn toetsen.
 
-\begin{align}
-  A \operatorname{Gen} B               & \vdash A \sim B \\
-  A \operatorname{Gen} C                & \vdash A \sim C \\
-  \sqcap(D) = \sqcap(A) \wedge A \sim C & \vdash D \sim C \\
-  \sqcap(D) = \sqcap(A) \wedge A \sim B & \vdash D \sim B \\
-  B, E \in \mathcal{G} \wedge A \sim D  & \vdash B \sim E 
-\end{align}
-
-
-%
-%
-%
-%
-%
-% TODO
-%
-%
-%
-%
-%
-
-\fbox{\Huge TODO}
+\begin{align*}
+  A \operatorname{Gen} B                 & \vdash A \sim B &           \\
+  A \operatorname{Gen} C                 & \vdash A \sim C &           \\
+  \sqcap(D) = \sqcap(A) \wedge A \sim C  & \vdash D \sim C &           \\
+  \sqcap(D) = \sqcap(A) \wedge A \sim B  & \vdash D \sim B &           \\
+  \sqcap(A) = \sqcap(D) \wedge D \sim D  & \vdash A \sim D &           \\
+  B, E \in \mathcal{G} \wedge A \sim D   & \vdash B \sim E &           \\
+  F, B \in \mathcal{G} \wedge A \sim A   & \vdash F \sim B & (B \in A) \\
+  \sqcap(D) = \sqcap (E) \wedge D \sim A & \vdash E \sim A &  \\
+  F, B \in \mathcal{G} \wedge E \sim A   & \vdash F \sim A &  \\
+  \sqcap(D) = \sqcap(E) \wedge D \sim D  & \vdash D \sim E &  \\
+  E, F \in \mathcal{G} \wedge D \sim E   & \vdash E \sim F &  \\
+  \sqcap(D) = \sqcap(F) \wedge D \sim A  & \vdash D \sim F & \\
+\end{align*}
 
 \subsection{Conclusie}
 
 Typegerelateerdheid is iets wat op een redelijk intu\"itief vlak werkt,
 maar ook een aantal harde regels kent. Veel van die regels zijn makkelijk
 beredeneerbaar, zoals bijvoorbeeld typegerelateerdheid van powertypen, en 
-sommige anderen zijn iets moeilijker om te onderbouwen.
+sommige anderen zijn iets moeilijker om te onderbouwen. Het consequent toepassen
+van die regels is echter vaak een flinke uitdaging, en waar het vaak makkelijk is
+om te zeggen ``$x$ is gerelateerd aan $y$, want zus en zo'', is dit opschrijven
+volgens de bovengenoemde regels (\ref{sse:regels}) vaak een uitdaging.
 
 \section{Taak 3 - Constraints en populeerbaarheid}
 
