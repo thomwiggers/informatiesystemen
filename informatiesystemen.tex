@@ -520,7 +520,41 @@ In dit onderdeel gebruik ik het volgende systeem:
   \total (\tau) & \text{ where } \tau = \{\mathcal{G} (C)\} \\
 \end{align*}
 
+Populeerbaarheid van dit systeem is gemakkelijk, men stopt gewoon overal een
+item in. Alle objecttypen zijn wel typegerelateerd, door de vele generalisaties
+en specialisaties.
 
+
+\section{Taak 4 - Metamodel van XML}
+
+\subsection{Inleiding}
+
+In deze taak ga ik ter oefening een metamodel maken voor XML. 
+
+\begin{quote}
+
+Extensible Markup Language (XML) is een standaard van het World Wide Web
+Consortium voor de syntaxis van formele opmaaktalen waarmee men gestructureerde
+gegevens kan weergeven in de vorm van platte tekst. Deze presentatie is zowel
+machineleesbaar als leesbaar voor de mens. Het XML-formaat wordt gebruikt om
+gegevens op te slaan (zoals in het OpenDocument-formaat) en om gegevens over
+het internet te versturen (zoals in AJAX).\cite{xmlwikipedia}
+\end{quote}
+
+\subsection{Aannames en definities}
+
+Ik laat bij de definitie van XML DTDs weg, en ga uit van elementen die
+attributen hebben met bepaalde waarden, en die elementen hebben zelf nul, een
+of meer waarden, die eventueel elementen zijn. Een XML-document moet precies
+1 root-element bevatten, welke alle andere elementen bevat.
+
+\begin{verbatim}
+<element attribuut="waarde">
+  foo
+</element>
+\end{verbatim} 
+
+\subsection{Schema}
 
 \begin{thebibliography}{9}
   \bibitem{dictaat}
@@ -528,6 +562,12 @@ In dit onderdeel gebruik ik het volgende systeem:
     Arthur ten Hofstede en Patrick van Bommel,
     Radboud Universiteit Nijmegen,
     September 2011.
+
+  \bibitem{xmlwikipedia}
+    Extensible Markup Language,
+    Wikipedia,
+    https://nl.wikipedia.org/wiki/XML,
+    Opgehaald 13 januari 2013.
 \end{thebibliography}
 
 \end{document}
