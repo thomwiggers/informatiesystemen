@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 
 \usepackage[pdftex]{graphicx}
+\usepackage{enumerate}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{hyperref}
@@ -11,6 +12,7 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage[section]{placeins}
+\usepackage{textcomp} 
 
 \author{Thom Wiggers\\ s4119444}
 \title{Informatiesystemen 1}
@@ -21,6 +23,10 @@
 \newcommand{\total}{\ensuremath{\operatorname{total}}}
 \newcommand{\unique}{\ensuremath{\operatorname{unique}}}
 \newcommand{\Pop}{\ensuremath{\operatorname{Pop}}}
+\newcommand{\I}{\ensuremath{\mathcal{I}}}
+\renewcommand{\O}{\ensuremath{\mathcal{O}}}
+\newcommand{\F}{\ensuremath{\mathcal{F}}}
+\renewcommand{\P}{\ensuremath{\mathcal{P}}}
 
 \begin{document}
 \maketitle
@@ -526,7 +532,7 @@ en specialisaties.
 
 \subsection{Inleiding}
 
-In deze taak ga ik ter oefening een metamodel maken voor XML. 
+In deze taak ga ik ter oefening een metamodel en een grammatica maken voor XML. 
 
 \begin{quote}
 
@@ -553,6 +559,184 @@ of meer waarden, die eventueel elementen zijn. Een XML-document moet precies
 
 \subsection{Schema}
 
+Een XML-document bevat XML-tags, die attributen hebben en een waarde kunnen 
+bevatten. Die waarde kunnen zelf weer XML-tags zijn, of Strings. De waarde
+is dus een generalisatie van Strings en van Tags. Attributen kunnen niet
+op zichzelf staan, en zijn naam-waarde paren. Attributen zijn dus een complex
+object. Een tag kan meer dan een waarde bevatten en volgorde maakt uit. Daarom
+is Waarde een sequencetype. Dat is echter niet iets wat Visiomodeler ondersteunt,
+en daarom is het niet opgenomen in afbeelding \ref{fig:xmlmodel}.
+
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[scale=0.8]{xml.png}
+  \caption{Metamodel voor XML}
+  \label{fig:xmlmodel}
+\end{figure}
+
+\subsection{Grammatica}
+
+\begin{align*}
+S               & : tag                                                                                                           \\ 
+tag             & : \text{\textless} tagnaam\  attributen \text{\textgreater} waarde \text{\textless/}tagnaam \text{\textgreater} \\ 
+attributen      & : attribuutnaam \text{=}^\text{\textquotestraightdblbase} attribuutwaarde ^\text{\textquotestraightdblbase}     \\ 
+attribuutnaam   & : naamstring                                                                                                    \\ 
+attribuutwaarde & : string                                                                                                        \\ 
+waarde          & : tag | string                                                                                                  \\ 
+tagnaam         & : naamstring                                                                                                    \\ 
+naamstring      & : a-z | -                                                                                                       \\ 
+string          & : a-z | A-Z | 0-9 | \dots                                                                                       \\ 
+\end{align*}
+
+\subsection{Conclusie}
+
+XML is eenvoudig te verwerken door andere systemen: het bevat maar weinig
+``rare dingen''. Dit is opnieuw gebleken in deze taak: XML is in weinig velden
+op te slaan, en gemakkelijk te parseren met een grammatica. 
+
+\section{Taak 5 - Oefening}
+
+\subsection{Inleiding}
+In deze taak ga ik het tentamen oefenen door het tentamen van 2011--2012\cite{tentamen2011} uit te 
+pluizen. 
+
+\subsection{Opgave 1}
+
+\subsubsection{a}
+\begin{quote}
+  Teken een voorbeeld van een informatiestructuur $\mathcal{I}$ waarin het aantal objecttypen 
+  $|\mathcal{O}| = 5$. Geef daarna de volledige definitie van die $\mathcal{I}$.\cite{tentamen2011}
+\end{quote}
+
+Deze opdracht is behoorlijk vrij. Aangezien er geen eisen zijn anders dan
+$|\mathcal{O}| =5$, voldoen 5 objecten zonder relaties al. 
+
+\begin{align*}
+  \mathcal{E} & = \{A,B,C,D,E\} \\
+  \mathcal{P} & = \emptyset\\
+  \mathcal{F} & = \emptyset \\
+  \mathcal{G} & = \emptyset        \\  
+  \mathcal{S} & = \emptyset        \\
+\end{align*}
+
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[every object type/.style={shape=circle},
+    edge from parent/.style={subtype,dotted}]
+
+    \entity (C) {C};
+    \entity[left= of C] (B) {B};
+    \entity[left= of B] (A) {A};
+    \entity[right=of C] (D) {D};
+    \entity[right=of D] (E) {E};
+  \end{tikzpicture}
+  \caption{Opdracht 1 a}
+  \label{fig:5-1-a}
+\end{figure}
+
+Er zijn onnoemelijk veel oplossingen voor deze vraag: namelijk zijn feittypen
+$\mathcal{F}$ ook onderdeel van $\mathcal{O}$. Verder kunnen er in plaats van
+entiteittypen, zoals in mijn oplossing, ook Labeltypen gebruikt worden.
+
+\subsubsection{b}
+
+\begin{quote}
+  In een informatiestructuur ontdekken we een gedeelte waarin objecttypen $x$ en
+  $y$ voorkomen met $y \Gen x$ en $\operatorname{Elt}(y) = x$. Is dat toegestaan?
+  \cite{tentamen2011}
+\end{quote}
+
+Het antwoord uit deze vraag hangt op de definitie van Elt$(y)$. Elt$(y)$ geeft
+het elementtype van powertype $y$ terug, wat dus betekent dat in deze vraag $y$
+een powertype over $x$ is. 
+
+Generalisaties ontlenen hun identificatie aan het type waarvan gegeneraliseerd
+wordt. Maar omdat $y$ als powertype toch al van $x$ afhangt, is dat geen
+probleem. De gegeven structuur is dus toegestaan.
+
+\subsubsection{c}
+
+\begin{quote}
+  In een informatiestructuur ontdekken we een gedeelte waarin de objecttypen
+  $x$ en $y$ voorkomen met $x \Spec y$ en $y \in \mathcal{F}$. Is dat
+  toegestaan? \cite{tentamen2011}
+\end{quote}
+
+$y$ is dus een feittype dat als objecttype gebruikt wordt en wat vervolgens
+gespecialiseerd wordt. Maar dat is gewoon toegestaan: $\mathcal{F} \subseteq
+\mathcal{O}$, en $\Spec \subseteq \mathcal{E} \times \mathcal{O}$. Als de relatie 
+omgekeerd was, dan was het niet toegestaan: naar feittypen kan men niet 
+specialiseren, enkel naar entiteittypen.
+
+\subsubsection{d}
+\label{ss2:1d}
+\begin{quote}
+
+  Laat $\I$ een informatiestructuur zijn met feittypen $\F = \left\{ \left\{ p_1,
+  p_2 \right\}, \left\{ p_3, p_4 \right\} \right\}$ waarbij $\Base(p_1)
+  = \Base(p_3) = A$ en $\Base(p_2) = \Base(p_4) = B$. Veronderstel dat we de
+  constraints $\operatorname{enumeration}(A, \left\{ a \right\})$ en
+  $\operatorname{exclusion}(\left\{ p_1 \right\}, \left\{ p_3 \right\})$
+  hebben. Welke van de volgende eigenschappen zijn nu geldig: 
+  \begin{enumerate}[i.]
+    \item Het schema is lokaal-atomair populeerbaar.
+    \item Het schema is globaal-atomair populeerbaar.
+    \item Het schema is lokaal-object populeerbaar.
+    \item Het schema is globaal-object populeerbaar.
+  \end{enumerate} 
+  \cite{tentamen2011}
+\end{quote}
+
+De enumeration constraint zorgt ervoor dat $A$ alleen het object $a$ bevat. Verder mogen
+$p_1$ en $p_3$ niet hetzelfde element bevatten. Globale objectpopuleerbaarheid is dus in 
+ieder geval onhaalbaar: er ontstaat dan een illegale populatie waarin $p_1 = p_3$.
+
+Lokaal-atomaire populeerbaarheid is wel haalbaar: $\Pop(A) = \{a\}, \Pop(B)
+= \{b\}$. Dit is ook direct een populatie die globaal-atomaire populeerbaarheid
+aantoont. Voor lokaal-object populeerbaarheid kan men de populaties $\Pop(A)
+= \{a\}, \Pop(B) = \{b\}$ gebruiken, en dan ofwel $\Pop (\{p_1,p_2\})
+= \{a,b\}$, ofwel $\Pop (\{p_3,p_4\}) = \{a,b\}$.
+
+\subsection{Opgave 2}
+
+\subsubsection{a}
+
+\begin{quote}
+  Laat $\I$ een informatiestructuur zijn met feittypen $\F$ en predicatoren $\P$. Is
+  het nu mogelijk dat $|\F| = |\P|$? \cite{tentamen2011}
+\end{quote} 
+
+Ja, bijvoorbeeld een $\I$ waarin $\F = \left\{ \{p_1\} \right\}$ en $\P = \{
+p_1\}$. Hier bevat $\F$ enkel een unair feittype.
+
+\subsubsection{b}
+
+\begin{quote}
+  Wanneer zijn twee feittypen type-gerelateerd? Licht je antwoord toe met
+  behulp van een kleine informatiestructuur. \cite{tentamen2011}
+\end{quote}
+
+Twee feittypen zijn gerelateerd als hun $\Base$ gerelateerd zijn. Dit is dus
+bijvoorbeeld in de structuur van vraag 1d in paragraaf \ref{ss2:1d}. Daar zijn
+de twee feittypen typegerelateerd, omdat $\vdash x \sim x$.
+
+\subsubsection{c}
+
+\begin{quote}
+  Laat $x$ een powertype zijn en laat $f = \{p_1, p_2\}$ een feittype zijn met
+  $\Base(p_1) = x$ en $\Base(p_2) = y$. Verder geldt het volgende: 
+
+  \begin{enumerate}[i.]
+    \item Alle predicatoren zijn totaal en uniek.
+    \item Objecttype $y$ is identificeerbaar.
+  \end{enumerate}
+  Is $x$ nu identificeerbaar? \cite{tentamen2011}
+\end{quote}
+
+
+
+
 \begin{thebibliography}{9}
   \bibitem{dictaat}
     Advanced Information Models, 
@@ -565,6 +749,9 @@ of meer waarden, die eventueel elementen zijn. Een XML-document moet precies
     Wikipedia,
     https://nl.wikipedia.org/wiki/XML,
     Opgehaald 13 januari 2013.
+
+  \bibitem{tentamen2011}
+    Tentamen Informatiesystemen (IS1), 2011.
 \end{thebibliography}
 
 \end{document}
