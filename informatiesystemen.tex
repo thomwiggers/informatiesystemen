@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
 
 \usepackage[pdftex]{graphicx}
 \usepackage{enumerate}
@@ -20,10 +20,13 @@
 \newcommand{\Spec}{\ensuremath{\operatorname{Spec}}}
 \newcommand{\Gen}{\ensuremath{\operatorname{Gen}}}
 \newcommand{\Base}{\ensuremath{\operatorname{Base}}}
+\newcommand{\Fact}{\ensuremath{\operatorname{Fact}}}
 \newcommand{\total}{\ensuremath{\operatorname{total}}}
 \newcommand{\unique}{\ensuremath{\operatorname{unique}}}
 \newcommand{\Pop}{\ensuremath{\operatorname{Pop}}}
 \newcommand{\I}{\ensuremath{\mathcal{I}}}
+\newcommand{\E}{\ensuremath{\mathcal{E}}}
+\renewcommand{\S}{\ensuremath{\mathcal{S}}}
 \renewcommand{\O}{\ensuremath{\mathcal{O}}}
 \newcommand{\F}{\ensuremath{\mathcal{F}}}
 \renewcommand{\P}{\ensuremath{\mathcal{P}}}
@@ -734,7 +737,215 @@ de twee feittypen typegerelateerd, omdat $\vdash x \sim x$.
   Is $x$ nu identificeerbaar? \cite{tentamen2011}
 \end{quote}
 
+$x$ is identificeerbaar, omdat $y$ dat is, en er door de totale rollen en uniqueness
+een 1-op-1 relatie tussen elke $x$ en een identificeerbare $y$ is.
 
+\subsubsection{d}
+
+\begin{quote}
+
+  Laat $f = \{p_1,p_2\}$ een feittype zijn met $\Base(p_1) = A$ en $\Base(p_2)
+  = B$ waarbij $B$ een schematype is. Veronderstel dat de informatiestructuur
+  van schematype $B$ twee objecttypen bevat:   
+
+  \[ \O_B = \{ C, D \} \]
+  
+  Geef een definitie vam de gehele populatie $\Pop$ waarbij $|\Pop(f)| = 2$.
+  Bij de definitie van deze populatie is het de bedoeling dat je de formele
+  notatie gebruikt. \cite{tentamen2011}
+
+\end{quote}
+
+\begin{align*}
+  \Pop(A) & = \{ a_1, a_2 \} \\
+  \Pop(C) & = \{ c_1 \}      \\
+  \Pop(D) & = \{ d_1 \}                                                                         \\
+  \Pop(f) & = \left\{ \{ p_1: a_1, p_2:\{c_1, d_1\}\}, \{ p_1: a_2, p_2:\{c_1, d_1\}\} \right\} \\
+\end{align*}
+
+
+\subsection{Opgave 3}
+
+\subsubsection{a}
+
+\begin{quote}
+
+  Laat $\tau = \{p_1, p_2\}$ een verzameling predicatoren zijn, zodanig dat: 
+
+  \[
+    \Fact(p_1) \neq \Fact(p_2) \text{ en } \Base(p_1) = \Fact(p_2)
+  \]
+
+  Geef een voorbeeldschema waarin de constraint $\unique(\tau)$ voorkomt. Is
+  die constraint syntactisch correct? Zo ja, geef dan de bijbehorende semantiek
+  van de constraint. Zo nee, geef dan aan hoe de fout verbeterd kan worden.
+  \cite{tentamen2011}
+
+\end{quote}
+
+$\Base(p_1) = \Fact(p_2)$ betekent dat $p_2$ in een feittype zit, waarmee $p_1$
+een relatie heeft. De constraint $\unique(\tau)$ is niet syntactisch correct:
+dit omdat $p_2$ in $p_1$ zit. Deze fout zou opgelost kunnen worden door $p_1$
+aan de andere kant van zijn feittype te zetten, en dus niet meer $\Base(p_1)
+= \Fact(p_2)$.
+
+\subsubsection{b}
+
+\begin{quote}
+  Wanneer noemen we een datamodel conceptueel? Gebruik bij je antwoord een 
+  isomorfisme. \cite{tentamen2011}
+\end{quote}
+
+Een conceptueel model is een datamodel dat slechts het universe of discourse
+modelleert en niets anders. Als een datamodel conceptueel is, behandelt het 
+slechts het datamodel, en andersom.
+
+\subsubsection{c}
+
+\begin{quote}
+  
+  We bekijken een informatiestructuur $\I$ met vier verschillende objecttypen
+  $x, y, z, f$ waarbij $f=\{p_1,p_2\}$ het enige (niet impliciete) feittype is.
+  Laat $x$ een powertype zijn met elementtype $y$. Laat $\Base(p_1) = y$ en
+  $\Base(p_2) = z$. Naast de vier genoemde objecttypen, is er ook nog het
+  impliciete feittype van $x$, dat is $\in_x = \{\in^e_x, \in^p_x\}$. Geef een
+  populatie van $\I$, waarin elk objecttype tenminste
+  1 instantie heeft, zodanig dat de constraint
+  $\operatorname{subset}(\{p_1\},\{\in^e_x\})$ wordt overtreden. Bij de definitie
+  van deze populatie moet je de formele notatie gebruiken. \cite{tentamen2011}
+
+\end{quote}
+
+\begin{align*}
+  \Pop(x)     & = \{\{y_1\}\}            \\ 
+  \Pop(y)     & = \{y_1, y_2\}           \\ 
+  \Pop(\in_x) & = \{ \{y_1, \{y_1\} \}\} \\ 
+  \Pop(z)     & = \{z_1\}                \\ 
+  \Pop(f)     & = \{ \{y_2, z_1\} \}     \\ 
+\end{align*}
+
+Nu geldt $p_1 \not\subset \in^e_x$.
+
+
+\subsubsection{d}
+
+\begin{quote}
+
+  Laat $\I$ een informatiestructuur zijn met een atomair objecttype $A$ en twee
+  feittypen $f = \{p_1, p_2\}$ en $g = \{p_3, p_4\}$ waarbij $\Base(p_i) = A$
+  voor alle $1 \leq i \leq 4$. Welke total role constraints in $\I$ zijn nu
+  mogelijk? \cite{tentamen2011}
+
+\end{quote}
+
+Er zijn geen andere constraints in $\I$, wat dus betekent dat er op elke
+predicator een total role constraint kan liggen. Verder kunnen er nog op elke
+combinatie van predicatoren uit beide feittypen een total role constraint
+liggen. Dit omdat ze allen van hetzelfde type zijn.
+
+\subsection{Opgave 4}
+
+\subsubsection{a}
+
+\begin{quote}
+  
+  Waarom heeft een sequentietype twee impliciete feittypen nodig? Licht je
+  antwoord toe met een kleine voorbeeldpopulatie. Bij de definitie van deze
+  populatie is het de bedoeling dat je de formele notatie gebruikt.
+  \cite{tentamen2011}
+
+\end{quote}
+
+Sequentietypen zijn zoals powertypen, maar met de toevoeging dat volgorde
+uitmaakt. Daarom is er de tweede impliciete predicator $@_x = \{@^s_x,
+@^i_x\}$.
+
+\begin{align*}
+  \E          & = \{x\}               \\ 
+  \S          & = \{y\}               \\ 
+  \Pop(x)     & = \{a\}               \\ 
+  \Pop(y)     & = \{ \{a\} \}         \\ 
+  \Pop(\in_y) & = \{ a, \{a\}\}       \\ 
+  \Pop(@_y)   & = \{\{a, \{a\}\}, 1\} \\ 
+\end{align*}
+
+
+\subsubsection{b}
+
+\begin{quote}
+
+  In een metamodel kan een feittype $\Gen = \{p_1, p_2\}$ voorkomen met
+  $\Base(p_1) = \E$ en $\Base(p_2) = \O$, waarbij $\E$ entiteittypen zijn en
+  $\O$ objecttypen. Omdat in het metamodel tevens $\O \Gen \E$ geldt, moet het
+  mogelijk zijn om het genomede feittype daarmee te populeren. Laat nu $t \in
+  \Pop(\Gen)$ een instantie van het feittype $\Gen$ zijn, waarmee we $\O \Gen
+  \E$ willen specificeren. Geef de definitie van $t$. Bij de definitie van deze
+  populatie is het de bedoeling dat je de formele notatie gebruikt.
+  \cite{tentamen2011}
+
+\end{quote}
+
+Eerst moeten we vaststellen wat $\O$ en $\E$ zijn. Dit zijn de objecttypen, die
+de instanties van $\O$ en $\E$ bevatten. De $\O$ en $\E$ in $\O \Gen \E$ zijn
+instanties in het metamodel, en in dit geval is $\O$ een instantie van $\O$ en
+$\E$ een instantie van $\E$. Dus $t = \{\E, \O\}$.
+
+\subsubsection{c}
+
+\begin{quote}
+  
+Laat $p_1 \circ p_2 \circ p_3^\leftarrow$ een padexpressie zijn met als
+semantiek $\{(a,b)\}$. Geef een informatiestructuur met populatie, zodanig dat
+de gegeven padexpressie inderdaad de gegeven semantiek heeft. Bij de definitie
+van de populatie hoef je niet de formele notatie te gebruiken, maar je moet wel
+de stapsgewijze evaluatie van de padexpressie uitwerken. \cite{tentamen2011}
+
+\end{quote}
+
+Opvallend aan deze expressie is dat er tweemaal een feittype binnen wordt
+gegaan. Dit kan dus niet anders dan een genest feittype betekenen. 
+
+Populaties: 
+\begin{align*}
+  \Pop(\{p_1, p_4\}) = \{ a , x \} \\
+  \Pop(\{p_2, p_3\}) = \{ \{a,x\}, b\} \\
+\end{align*}
+
+Evaluatie: 
+
+\begin{align*}
+  p_1 &\Rightarrow \{a, \_\} \\
+  p_1 \circ p_2                      & \Rightarrow \{ \{a, \_, \_ \} \\
+  p_1 \circ p_2 \circ p_3^\leftarrow & \Rightarrow \{ a, b \}        \\
+\end{align*}
+
+\subsubsection{d}
+\begin{quote} 
+
+  Laat $G$ de grammatica zijn met de volgende regels: 
+  \begin{align*}
+    R_1 & : X \rightarrow yY \\
+    R_2 & : Y \rightarrow xX \\
+    R_3 & : Y \rightarrow Y  \\
+  \end{align*}
+
+  Bepaal welke feittypen er in het schema $\Delta(G)$ moeten komen. Geef dan
+  het hele schema en bepaal of dat schema identificeerbaar is.
+
+\end{quote}
+
+Voor elk terminale symbool is er een entiteittype met labeltype nodig, en voor
+elk productiesymbool is er een entiteittype nodig. Elke productieregel
+generaliseert naar het product.
+
+Productieregel $R_3$ zorgt ervoor dat dit schema niet identificeerbaar is,
+namelijk is het niet mogelijk om een $Y$ te identificeren die naar zichzelf
+generaliseert. Het is mogelijk een $n$ aantal stappen door $R_3$ te doen, maar
+dat is niet uit elkaar te houden van een schema dat $n+1$ stappen erdoor doet.
+
+\subsection{Conclusie}
+De meeste stof beheers ik, maar sommige dingen zijn nog wat vaag. Dit tentamen
+maken heeft wel geholpen met de stof bevatten.
 
 
 \begin{thebibliography}{9}
