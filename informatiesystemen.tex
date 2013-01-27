@@ -562,13 +562,14 @@ of meer waarden, die eventueel elementen zijn. Een XML-document moet precies
 
 \subsection{Schema}
 
-Een XML-document bevat XML-tags, die attributen hebben en een waarde kunnen 
-bevatten. Die waarde kunnen zelf weer XML-tags zijn, of Strings. De waarde
-is dus een generalisatie van Strings en van Tags. Attributen kunnen niet
+Een XML-document bevat XML-tags, die attributen hebben en een waarde kunnen
+bevatten. Die waarde kunnen zelf weer XML-tags zijn, of Strings. De waarde is
+dus een generalisatie van Strings en van Tags. Waarden kunnen niet op zichzelf
+staan en elke waarde moet dus bevat worden door een Tag. Attributen kunnen niet
 op zichzelf staan, en zijn naam-waarde paren. Attributen zijn dus een complex
 object. Een tag kan meer dan een waarde bevatten en volgorde maakt uit. Daarom
-is Waarde een sequencetype. Dat is echter niet iets wat Visiomodeler ondersteunt,
-en daarom is het niet opgenomen in afbeelding \ref{fig:xmlmodel}.
+is Waarde een sequencetype. Dat is echter niet iets wat Visiomodeler
+ondersteunt, en daarom is het niet opgenomen in afbeelding \ref{fig:xmlmodel}.
 
 \begin{figure}[htpb]
   \centering
